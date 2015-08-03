@@ -1,0 +1,8 @@
+Followed some tutorial back in 2005 to make a minimal kernel/operating system
+that runs in an x86 machine and is bootable from a floppy disk. This is a
+working result. Sadly I can't find the tutorial I used anymore, but most of
+the code was lifted from there. Some new system commands were programmed in to
+make it actually do something.
+
+It worked on one of the computers at school as well as my one at home, so in
+this sense it is 'portable'.

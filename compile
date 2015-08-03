@@ -1,0 +1,33 @@
+# compile thing
+
+echo "gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/kmain.o src/kmain.c"
+gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/kmain.o src/kmain.c
+echo "gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/mem.o src/mem.c"
+gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/mem.o src/mem.c
+echo "gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/portb.o src/portb.c"
+gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/portb.o src/portb.c
+echo "gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/screen.o src/screen.c"
+gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/screen.o src/screen.c
+echo "gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/gdt.o src/gdt.c"
+gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/gdt.o src/gdt.c
+echo "gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/idt.o src/idt.c"
+gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/idt.o src/idt.c
+echo "gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/isrs.o src/isrs.c"
+gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/isrs.o src/isrs.c
+echo "gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/irq.o src/irq.c"
+gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/irq.o src/irq.c
+echo "gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/timer.o src/timer.c"
+gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/timer.o src/timer.c
+echo "gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/kb.o src/kb.c"
+gcc -Wall -O -fstrength-reduce -fomit-frame-pointer -finline-functions -nostdinc -fno-builtin -c -o build/kb.o src/kb.c
+
+
+echo "nasm -f aout -o build/start.o src/start.asm"
+nasm -f aout -o build/start.o src/start.asm
+
+echo "ld -T ./link.ld -o ./kernel.bin ./build/start.o ./build/kmain.o ./build/mem.o ./build/portb.o ./build/screen.o ./build/gdt.o ./build/idt.o ./build/isrs.o ./build/irq.o ./build/timer.o ./build/kb.o"
+ld -T ./link.ld -o ./kernel.bin ./build/start.o ./build/kmain.o ./build/mem.o ./build/portb.o ./build/screen.o ./build/gdt.o ./build/idt.o ./build/isrs.o ./build/irq.o ./build/timer.o ./build/kb.o
+
+sudo mount ./grub.img /mnt/floppy/ -o loop
+sudo cp ./kernel.bin /mnt/floppy/
+sudo umount /mnt/floppy/
